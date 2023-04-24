@@ -25,6 +25,7 @@ function M.config()
 
     require("telescope").setup({
         defaults = {
+            sorting_strategy = "ascending",
             path_display = { "smart" },
             file_ignore_patterns = { ".git/", "node_modules/" },
             mappings = {
