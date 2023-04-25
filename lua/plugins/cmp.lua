@@ -9,20 +9,23 @@ local M = {
         {
             "L3MON4D3/LuaSnip",
             event = "InsertEnter",
-            dependencies = { "rafamadriz/friendly-snippets" }
+            dependencies = { "rafamadriz/friendly-snippets" },
         },
         "hrsh7th/cmp-nvim-lua",
         "onsails/lspkind.nvim",
         "hrsh7th/cmp-nvim-lsp-signature-help",
+        "KadoBOT/cmp-plugins",
     },
     event = { "InsertEnter", "CmdlineEnter" },
 }
-
 
 function M.config()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     require("luasnip.loaders.from_vscode").lazy_load()
+    require("cmp-plugins").setup({
+        files = { vim.fn.stdpath("config") .. "/lua/plugins/*.lua" },
+    })
 
     local check_backspace = function()
         local col = vim.fn.col(".") - 1
@@ -60,8 +63,7 @@ function M.config()
                 else
                     fallback()
                 end
-            end,
-            { "i", "s" }),
+            end, { "i", "s" }),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
@@ -70,8 +72,7 @@ function M.config()
                 else
                     fallback()
                 end
-            end,
-            { "i", "c" }),
+            end, { "i", "c" }),
         }),
         formatting = {
             fields = { "kind", "abbr", "menu" },
@@ -80,31 +81,34 @@ function M.config()
                 maxwidth = 60,
                 ellipsis_char = "...",
                 before = function(entry, vim_item)
-                    if vim.tbl_contains({ 'path' }, entry.source.name) then
-                        local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+                    if vim.tbl_contains({ "path" }, entry.source.name) then
+                        local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
                         if icon then
                             vim_item.kind = icon
                             vim_item.kind_hl_group = hl_group
                         end
                     end
                     return vim_item
-                end
-            })
+                end,
+            }),
         },
-        sources = {
-            { name = "nvim_lsp" },
-            { name = "nvim_lua" },
-            { name = "luasnip" },
-            { name = "buffer" },
+        sources = cmp.config.sources({
+            { name = "nvim_lsp",               max_item_count = 10 },
+            { name = "nvim_lua",               max_item_count = 10 },
+            { name = "cmp_plugins",            max_item_count = 10 },
+            { name = "luasnip",                max_item_count = 5 },
+            { name = "nvim_lsp_signature_help" },
+        }, {
+            { name = "buffer", max_item_count = 10 },
             {
                 name = "path",
                 option = {
                     trailing_slash = true,
                     get_cwd = vim.loop.cwd,
-                }
+                },
+                max_item_count = 5,
             },
-            { name = "nvim_lsp_signature_help" },
-        },
+        }),
         window = {
             completion = cmp.config.window.bordered(),
             documentation = cmp.config.window.bordered(),
@@ -114,20 +118,18 @@ function M.config()
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = "path" }
+            { name = "path" },
         }, {
-            { name = "cmdline" }
-        })
+            { name = "cmdline" },
+        }),
     })
-
 
     cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = "buffer" }
-        }
+            { name = "buffer" },
+        },
     })
 end
-
 
 return M
