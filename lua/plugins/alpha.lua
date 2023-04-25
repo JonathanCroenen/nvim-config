@@ -29,7 +29,7 @@ function M.config()
         dashboard.button("f r", " " .. " Recent Files", "<cmd>Telescope oldfiles <CR>"),
         dashboard.button("f t", " " .. " Find Text", "<cmd>Telescope live_grep <CR>"),
         dashboard.button("e c", " " .. " Edit Config",
-            "<cmd>lua vim.cmd.edit(vim.fn.stdpath('config'))<CR>"),
+            "<cmd>lua local cfg = vim.fn.stdpath('config') vim.cmd.cd(cfg) vim.cmd.edit(cfg)<CR>"),
         dashboard.button("q", " " .. " Quit", "<cmd>qa<CR>"),
     }
 

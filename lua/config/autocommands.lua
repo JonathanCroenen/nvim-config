@@ -42,10 +42,9 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("nvim_tree_open", {}),
     callback = function(ctx)
-        local api = require("nvim-tree.api")
         if vim.fn.isdirectory(ctx.file) == 1 then
             vim.cmd.enew()
-            api.tree.open({ path = ctx.file })
+            require("nvim-tree.api").tree.open({ path = ctx.file })
         end
     end
 })
@@ -58,3 +57,13 @@ vim.api.nvim_create_autocmd({ "TermEnter", "BufEnter" }, {
         vim.cmd.startinsert()
     end
 })
+
+
+-- Open nvim-tree when restoring a session
+vim.api.nvim_create_autocmd("SessionLoadPost", {
+    callback = function()
+        require("nvim-tree.api").open()
+    end,
+})
+
+
