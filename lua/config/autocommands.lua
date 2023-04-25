@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ "TermEnter", "BufEnter" }, {
 -- Open nvim-tree when restoring a session
 vim.api.nvim_create_autocmd("SessionLoadPost", {
     callback = function()
-        require("nvim-tree.api").open()
+        require("nvim-tree.api").tree.open()
     end,
 })
 

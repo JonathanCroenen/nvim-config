@@ -17,17 +17,7 @@ local on_attach = function(bufnr)
         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
 
-    local set_pwd = function()
-        local node = api.tree.get_node_under_cursor()
-        if vim.fn.isdirectory(node.absolute_path) == 1 then
-            vim.cmd.cd(node.absolute_path)
-        else
-            vim.cmd.cd(node.parent.absolute_path)
-        end
-        api.tree.change_root_to_node()
-    end
-
-    vim.keymap.set("n", "cd", set_pwd, opts("CD"))
+    vim.keymap.set("n", "cd", api.tree.change_root_to_node, opts("CD"))
     vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
     vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
     vim.keymap.set("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
@@ -78,7 +68,7 @@ local on_attach = function(bufnr)
     vim.keymap.set("n", "cp", api.fs.copy.relative_path, opts("Copy Relative Path"))
     vim.keymap.set("n", "cP", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
     vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
-    vim.keymap.set("n", "<2-RightMouse>", set_pwd, opts("CD"))
+    vim.keymap.set("n", "<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
     vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
 end
 
@@ -98,7 +88,7 @@ function M.config()
         },
         update_focused_file = {
             enable = true,
-            update_cwd = true,
+            update_cwd = false,
             ignore_list = { "help", "man" }
         },
         diagnostics = {
