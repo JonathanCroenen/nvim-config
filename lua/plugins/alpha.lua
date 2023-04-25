@@ -23,8 +23,7 @@ function M.config()
     }
 
     dashboard.section.buttons.val = {
-        dashboard.button("r s", " " .. " Restore Session",
-            "<cmd>lua require('telescope').extensions.projects.projects()<CR>"),
+        dashboard.button("r s", " " .. " Restore Session", "<cmd>SessionManager load_session<CR>"),
         dashboard.button("n f", " " .. " New File", "<cmd>enew<CR>"),
         dashboard.button("f f", " " .. " Find File", "<cmd>Telescope find_files <CR>"),
         dashboard.button("f r", " " .. " Recent Files", "<cmd>Telescope oldfiles <CR>"),
