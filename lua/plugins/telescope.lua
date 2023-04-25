@@ -25,6 +25,12 @@ function M.config()
 
     require("telescope").setup({
         defaults = {
+            layout_strategy = "horizontal",
+            layout_config = {
+                prompt_position = "top",
+            },
+            prompt_prefix = " ",
+            selection_caret = "  ",
             sorting_strategy = "ascending",
             path_display = { "smart" },
             file_ignore_patterns = { ".git/", "node_modules/" },
@@ -38,6 +44,24 @@ function M.config()
             }
         }
     })
+
+    local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
+    local fg_alt = vim.api.nvim_get_hl(0, { name = "Function" }).fg
+    local bg = vim.api.nvim_get_hl(0, { name = "NormalFloat" }).bg
+    local bg_alt = vim.api.nvim_get_hl(0, { name = "Visual" }).bg
+
+    vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = bg_alt, bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = bg, bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = bg, bg = fg_alt })
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = bg_alt, bg = bg_alt })
+    vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = fg, bg = bg_alt })
+    vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = fg_alt, bg = bg_alt })
+    vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = bg, bg = fg_alt })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = bg, bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = bg })
+    vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = bg, bg = bg })
 
     require("telescope").load_extension("fzf")
 end

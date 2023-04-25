@@ -110,6 +110,20 @@ function M.config()
         renderer = {
             indent_markers = {
                 enable = true,
+            },
+            icons = {
+                glyphs = {
+                    folder = {
+                        default = "",
+                        empty = "",
+                        empty_open = "",
+                        open = "",
+                        symlink = "",
+                        symlink_open = "",
+                        arrow_open = "",
+                        arrow_closed = "",
+                    },
+                }
             }
         },
         modified = {
