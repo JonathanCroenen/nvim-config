@@ -15,6 +15,10 @@ local M = {
         {
             "nvim-telescope/telescope-symbols.nvim",
             event = "VeryLazy",
+        },
+        {
+            "nvim-telescope/telescope-ui-select.nvim",
+            event = "VeryLazy",
         }
     },
 }
@@ -64,6 +68,7 @@ function M.config()
     vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = bg, bg = bg })
 
     require("telescope").load_extension("fzf")
+    require("telescope").load_extension("ui-select")
 end
 
 
