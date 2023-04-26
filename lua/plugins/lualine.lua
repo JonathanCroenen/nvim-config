@@ -8,8 +8,8 @@ local M = {
         },
         {
             "nvim-tree/nvim-web-devicons",
-            event = "VimEnter"
-        }
+            event = "VimEnter",
+        },
     },
 }
 
@@ -20,18 +20,29 @@ function M.config()
         return vim.fn.winwidth(0) > 80
     end
 
+    local symbols = require("config.symbols")
+
     local diagnostics = {
         "diagnostics",
-        sources  = { "nvim_diagnostic" },
+        sources = { "nvim_diagnostic" },
         sections = { "error", "warn", "hint" },
-        symbols = { error = " ", warn = " ", info = " ", hint = " " },
+        symbols = {
+            error = symbols.error,
+            warn = symbols.warn,
+            info = symbols.info,
+            hint = symbols.hint,
+        },
         colored = true,
         always_visible = true,
     }
 
     local diff = {
         "diff",
-        symbols = { added = " ", modified = " ", removed = " " },
+        symbols = {
+            added = symbols.added,
+            modified = symbols.modified,
+            removed = symbols.removed,
+        },
         colored = true,
         cond = hide_in_width,
     }
@@ -64,10 +75,10 @@ function M.config()
             lualine_a = { "mode" },
             lualine_b = { diff, "branch" },
             lualine_c = { diagnostics, "lsp_progress" },
-            lualine_x = { filetype, "encoding", },
+            lualine_x = { filetype, "encoding" },
             lualine_y = { "location" },
             lualine_z = { progress },
-        }
+        },
     })
 end
 

@@ -80,7 +80,7 @@ function M.config()
                 mode = "symbol",
                 maxwidth = 60,
                 ellipsis_char = "...",
-                before = function(entry, vim_item)
+                before = function(entry, vim_item) -- places type icons before the completion item
                     if vim.tbl_contains({ "path" }, entry.source.name) then
                         local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
                         if icon then

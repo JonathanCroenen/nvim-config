@@ -1,6 +1,6 @@
 local M = {
     "neovim/nvim-lspconfig",
-    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "hrsh7th/cmp-nvim-lsp" }
 }
 
@@ -51,6 +51,18 @@ function M.config()
 
         lspconfig[server].setup(opts)
     end
+
+    -- Set icons in sign column
+    local set_diagnostic_sign = function(type, icon)
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
+
+    local symbols = require("config.symbols")
+    set_diagnostic_sign("Error", symbols.error)
+    set_diagnostic_sign("Warning", symbols.warn)
+    set_diagnostic_sign("Information", symbols.info)
+    set_diagnostic_sign("Hint", symbols.hint)
 end
 
 return M

@@ -74,6 +74,8 @@ end
 
 
 function M.config()
+    local symbols = require("config.symbols")
+
     require("nvim-tree").setup({
         disable_netrw = true,
         -- hijack_netrw = true,
@@ -106,14 +108,14 @@ function M.config()
             icons = {
                 glyphs = {
                     folder = {
-                        default = "",
-                        empty = "",
-                        empty_open = "",
-                        open = "",
-                        symlink = "",
-                        symlink_open = "",
-                        arrow_open = "",
-                        arrow_closed = "",
+                        default = symbols.folder,
+                        empty = symbols.folder_empty,
+                        empty_open = symbols.folder_empty,
+                        open = symbols.folder,
+                        symlink = symbols.folder_symlink,
+                        symlink_open = symbols.folder_symlink,
+                        arrow_open = symbols.arrow_open,
+                        arrow_closed = symbols.arrow_closed,
                     },
                 }
             }
