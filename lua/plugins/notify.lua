@@ -77,7 +77,7 @@ function M.config()
 			TRACE = symbols.trace,
 		},
 		render = "default",
-		top_down = true,
+		max_width = 50,
 	})
 
 	vim.api.nvim_set_hl(0, "NotifyERRORBorder", { link = "Error" })

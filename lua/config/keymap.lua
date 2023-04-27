@@ -54,25 +54,26 @@ keymap("n", "<C-u>", "zz<C-u>", opts("Half Page Up"))
 -- Keep original clipboard when pasting over visual selection
 keymap("v", "p", '"_dP', opts("Paste Over Selection"))
 
-
 -- Plugins
 --
 -- NvimTree
-keymap("n", "<leader>t", "<cmd>NvimTreeToggle<CR>", opts("nvim-tree: Toggle"))
+keymap("n", "<leader>t", require("nvim-tree.api").tree.toggle, opts("nvim-tree: Toggle"))
 
 -- Comment
-keymap("n", "<C-/>", function() require("Comment.api").toggle.linewise.current() end, opts("comment: Toggle Line"))
+keymap("n", "<C-/>", function()
+    require("Comment.api").toggle.linewise.current()
+end, opts("comment: Toggle Line"))
 keymap("x", "<C-/>", function()
     local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
     vim.api.nvim_feedkeys(esc, "nx", false)
     require("Comment.api").toggle.linewise(vim.fn.visualmode())
 end, opts("comment: Toggle Selection"))
 
-
 -- Telescope
 keymap("n", "<leader>ff", function()
     require("telescope.builtin").find_files({
-        hidden = true, no_ingore = true
+        hidden = true,
+        no_ingore = true,
     })
 end, opts("telescope: Find Files"))
 keymap("n", "<leader>fg", require("telescope.builtin").live_grep, opts("telescope: Live Grep"))
@@ -92,6 +93,31 @@ if vim.g.neovide then
         vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
     end
 
-    vim.keymap.set('n', '<C-=>', function() change_scale_factor(0.1) end, opts("neovide: Increase Zoom Level"))
-    vim.keymap.set('n', '<C-->', function() change_scale_factor(-0.1) end, opts("neovide: Decrease Zoom Level"))
+    keymap("n", "<C-=>", function()
+        change_scale_factor(0.1)
+    end, opts("neovide: Increase Zoom Level"))
+
+    keymap("n", "<C-->", function()
+        change_scale_factor(-0.1)
+    end, opts("neovide: Decrease Zoom Level"))
+
+    vim.g.neovide_fullscreen = false
+    keymap("n", "<F11>", function()
+        vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+        vim.notify(
+            "Fullscreen: " .. (vim.g.neovide_fullscreen and "on" or "off"),
+            vim.log.levels.INFO,
+            { title = "Neovide" }
+        )
+    end, opts("neovide: Toggle Fullscreen"))
+
+    vim.g.neovide_profiler = false
+    keymap("n", "<F12>", function()
+        vim.g.neovide_profiler = not vim.g.neovide_profiler
+        vim.notify(
+            "Performance Overlay: " .. (vim.g.neovide_profiler and "on" or "off"),
+            vim.log.levels.INFO,
+            { title = "Neovide" }
+        )
+    end, opts("neovide: Toggle Performance Overlay"))
 end

@@ -56,13 +56,27 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- don't insert the current comm
 
 
 if vim.g.neovide then
+    vim.g.neovide_padding_top = 0
+    vim.g.neovide_padding_bottom = 10
+    vim.g.neovide_padding_right = 0
+    vim.g.neovide_padding_left = 0
+
     vim.g.neovide_transparency = 1.0
     vim.g.transparency = 0.85
-    vim.g.neovide_floating_blur_amount_x = 2.0
-    vim.g.neovide_floating_blur_amount_y = 2.0
+    -- vim.g.neovide_floating_blur_amount_x = 2.0 -- doesn't seem to do anything
+    -- vim.g.neovide_floating_blur_amount_y = 2.0
+
+    vim.g.neovide_scroll_animation_length = 0.4
     vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_no_idle = true
+    vim.g.neovide_refresh_rate = 120
+    vim.g.neovide_refresh_rate_idle = 60
+
     vim.g.neovide_remember_window_size = true
+    vim.g.neovide_cursor_animation_length = 0.1
     vim.g.neovide_cursor_trail_size = 0.0
-    vim.g.neovide_cursor_animate_command_line = false
+    vim.g.neovide_cursor_antialiasing = true
+    vim.g.neovide_cursor_animate_in_insert_mode = true
+    vim.g.neovide_cursor_animate_command_line = true
+
+    vim.g.neovide_confirm_quit = true
 end

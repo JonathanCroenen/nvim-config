@@ -7,6 +7,7 @@ local M = {
 
 function M.config()
     require("catppuccin").setup({
+        flavour = "mocha",
         integrations = {
             nvimtree = true,
             bufferline = true,
@@ -35,7 +36,7 @@ function M.config()
         }
     })
 
-    vim.cmd.colorscheme("catppuccin-mocha")
+    vim.cmd.colorscheme("catppuccin")
 end
 
 
