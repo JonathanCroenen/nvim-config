@@ -80,6 +80,7 @@ keymap("n", "<leader>fb", require("telescope.builtin").buffers, opts("telescope:
 keymap("n", "<leader>fh", require("telescope.builtin").help_tags, opts("telescope: Help Tags"))
 keymap("n", "<leader>fd", require("telescope.builtin").diagnostics, opts("telescope: Diagnostics"))
 keymap("n", "<leader>fs", require("telescope.builtin").symbols, opts("telescope: Symbols"))
+keymap("n", "<leader>fn", require("telescope").extensions.notify.notify, opts("telescope: Symbols"))
 
 -- Neovide
 --

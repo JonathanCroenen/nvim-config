@@ -3,6 +3,8 @@ return {
     warn = " ",
     info = " ",
     hint = " ",
+    debug = "",
+    trace = "✎",
     added = " ",
     modified = " ",
     removed = " ",

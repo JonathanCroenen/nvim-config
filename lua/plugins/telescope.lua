@@ -31,6 +31,9 @@ function M.config()
         defaults = {
             layout_strategy = "horizontal",
             layout_config = {
+                width = 0.7,
+                height = 0.7,
+                preview_width = 0.5,
                 prompt_position = "top",
             },
             prompt_prefix = " ",
@@ -44,6 +47,14 @@ function M.config()
                     ["<Up>"] = actions.move_selection_previous,
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
+                }
+            }
+        },
+        extensions = {
+            ["ui-select"] = {
+                layout_config = {
+                    width = 0.4,
+                    height = 0.4,
                 }
             }
         }
@@ -69,6 +80,7 @@ function M.config()
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("ui-select")
+    require("telescope").load_extension("notify")
 end
 
 
