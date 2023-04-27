@@ -57,7 +57,7 @@ keymap("v", "p", '"_dP', opts("Paste Over Selection"))
 -- Plugins
 --
 -- NvimTree
-keymap("n", "<leader>t", require("nvim-tree.api").tree.toggle, opts("nvim-tree: Toggle"))
+keymap("n", "<leader>t", "<cmd>NvimTreeToggle<CR>", opts("nvim-tree: Toggle"))
 
 -- Comment
 keymap("n", "<C-/>", function()
