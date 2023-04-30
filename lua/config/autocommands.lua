@@ -1,6 +1,6 @@
 -- Make command info windows close with just q
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
+    pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "checkhealth", "notify" },
     callback = function()
         vim.keymap.set("n", "q", "<cmd>close<CR>", { silent = true, buffer = true })
         vim.o.buflisted = false

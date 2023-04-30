@@ -35,6 +35,9 @@ function M.config()
 	local lspkind = require("lspkind")
 
 	cmp.setup({
+        performance = {
+            debounce = 3000,
+        },
 		snippet = {
 			expand = function(args)
 				luasnip.lsp_expand(args.body)

@@ -13,11 +13,10 @@ function M.config()
 
     illuminate.configure({
         providers = {
-            "lsp",
             "treesitter",
             "regex",
         },
-        delay = 200,
+        delay = 300,
         filetypes_denylist = {
             "dirvish",
             "fugitive",
@@ -39,7 +38,7 @@ function M.config()
         providers_regex_syntax_denylist = {},
         providers_regex_syntax_allowlist = {},
         under_cursor = true,
-        large_file_cutoff = 10000,
+        large_file_cutoff = 5000,
         min_count_to_highlight = 2,
     })
 
