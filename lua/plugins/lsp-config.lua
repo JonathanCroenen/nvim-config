@@ -7,7 +7,14 @@ local M = {
 function M.config()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+    -- Enable some capabilities not included in neovim default capabilities
     capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+    }
+
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
     local lsp_keymaps = function(bufnr)

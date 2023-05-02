@@ -20,7 +20,7 @@ function M.config()
             formatting.clang_format,
             formatting.gofmt,
             formatting.rustfmt,
-            diagnostics.todo_comments,
+            -- diagnostics.todo_comments,
             diagnostics.checkmake,
             diagnostics.eslint,
 

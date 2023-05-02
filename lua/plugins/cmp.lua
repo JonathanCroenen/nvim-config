@@ -36,7 +36,8 @@ function M.config()
 
 	cmp.setup({
         performance = {
-            debounce = 3000,
+            debounce = 300,
+            throttle = 100,
         },
 		snippet = {
 			expand = function(args)
@@ -95,7 +96,7 @@ function M.config()
 				end,
 			}),
 		},
-		sources = {
+		sources = cmp.config.sources({
 			{
 				name = "nvim_lsp",
 				max_item_count = 10,
@@ -107,7 +108,6 @@ function M.config()
 			{ name = "cmp_plugins", max_item_count = 10 },
 			{ name = "luasnip", max_item_count = 5 },
 			{ name = "nvim_lsp_signature_help" },
-			{ name = "buffer", max_item_count = 10 },
 			{
 				name = "path",
 				option = {
@@ -116,7 +116,9 @@ function M.config()
 				},
 				max_item_count = 5,
 			},
-		},
+		}, {
+			{ name = "buffer", max_item_count = 10 },
+        }),
 		window = {
 			completion = cmp.config.window.bordered(),
 			documentation = cmp.config.window.bordered(),

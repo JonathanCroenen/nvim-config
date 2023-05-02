@@ -12,7 +12,17 @@ keymap("n", "J", "<Nop>", opts("Disable J"))
 keymap("n", "Q", "<Nop>", opts("Disable Q"))
 
 -- Save with Ctrl+s
-keymap("n", "<C-s>", "<cmd>w<CR>", opts("Save File"))
+local save = function()
+    if vim.api.nvim_buf_get_name(0) == "" then
+        local filename = vim.fn.input("Save as: ")
+        if filename ~= "" then
+            vim.cmd.write(filename)
+        end
+    else
+        vim.cmd.update()
+    end
+end
+keymap("n", "<C-s>", save, opts("Save File"))
 
 -- Navigating splits with Alt
 keymap({ "n", "t" }, "<M-h>", "<cmd>wincmd h<CR>", opts("Window Left"))
