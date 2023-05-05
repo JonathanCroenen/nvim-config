@@ -1,6 +1,8 @@
 # nvim-config
 My personal neovim config
 
+![image](https://user-images.githubusercontent.com/44034156/236438365-5e5beb95-460a-4824-ab4e-863253ca06b9.png)
+
 ## Plugins
 * lazy.nvim
 * catppuccin
@@ -44,8 +46,7 @@ My personal neovim config
 * indent-blankline.nvim
 * nvim-autopairs
 
-## Screenshots
+## More Screenshots
 ![image](https://user-images.githubusercontent.com/44034156/234037090-7fbffa78-5325-4b10-a489-479fd1e0de37.png)
-![image](https://user-images.githubusercontent.com/44034156/236438365-5e5beb95-460a-4824-ab4e-863253ca06b9.png)
 ![image](https://user-images.githubusercontent.com/44034156/236446112-23f91a5d-f785-47c2-97af-b016c32f4b63.png)
 
