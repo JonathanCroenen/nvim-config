@@ -9,7 +9,7 @@ local M = {
 function M.config()
     require("ufo").setup({
         provider_selector = function(_, _, _)
-            return { "lsp", "treesitter" }
+            return { "treesitter", "indent" } -- works fine and less overhead with slow ls
         end
     })
 end
