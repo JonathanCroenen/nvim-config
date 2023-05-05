@@ -12,6 +12,7 @@ function M.config()
 
     null_ls.setup({
         debug = false,
+        debounce = 250,
         sources = {
             formatting.black,
             formatting.prettier,
@@ -20,7 +21,7 @@ function M.config()
             formatting.clang_format,
             formatting.gofmt,
             formatting.rustfmt,
-            -- diagnostics.todo_comments,
+            diagnostics.todo_comments,
             diagnostics.checkmake,
             diagnostics.eslint,
 

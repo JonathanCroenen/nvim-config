@@ -1,7 +1,9 @@
 local M = {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "hrsh7th/cmp-nvim-lsp" }
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp"
+    }
 }
 
 function M.config()
@@ -27,7 +29,7 @@ function M.config()
         keymap("n", "gd", vim.lsp.buf.definition, opts("Go To Definition"))
         keymap("n", "K", vim.lsp.buf.hover, opts("Hover"))
         keymap("n", "gI", vim.lsp.buf.implementation, opts("Go To Implementations"))
-        keymap("n", "gr", vim.lsp.buf.references, opts("Go To References"))
+        keymap("n", "gr", require("telescope.builtin").lsp_references, opts("Go To References"))
         keymap("n", "gl", vim.diagnostic.open_float, opts("Open Diagnostic Float"))
         keymap("n", "<leader>li", "<cmd>LspInfo<CR>", opts("Open Lsp Info"))
         keymap("n", "<leader>lI", "<cmd>Mason<CR>", opts("Open Mason"))

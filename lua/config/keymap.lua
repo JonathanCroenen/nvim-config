@@ -64,10 +64,13 @@ keymap("n", "<C-u>", "zz<C-u>", opts("Half Page Up"))
 -- Keep original clipboard when pasting over visual selection
 keymap("v", "p", '"_dP', opts("Paste Over Selection"))
 
+
+
 -- Plugins
 --
 -- NvimTree
 keymap("n", "<leader>t", "<cmd>NvimTreeToggle<CR>", opts("nvim-tree: Toggle"))
+
 
 -- Comment
 keymap("n", "<C-/>", function()
@@ -78,6 +81,7 @@ keymap("x", "<C-/>", function()
     vim.api.nvim_feedkeys(esc, "nx", false)
     require("Comment.api").toggle.linewise(vim.fn.visualmode())
 end, opts("comment: Toggle Selection"))
+
 
 -- Telescope
 keymap("n", "<leader>ff", function()
@@ -92,6 +96,26 @@ keymap("n", "<leader>fh", require("telescope.builtin").help_tags, opts("telescop
 keymap("n", "<leader>fd", require("telescope.builtin").diagnostics, opts("telescope: Diagnostics"))
 keymap("n", "<leader>fs", require("telescope.builtin").symbols, opts("telescope: Symbols"))
 keymap("n", "<leader>fn", require("telescope").extensions.notify.notify, opts("telescope: Symbols"))
+
+
+-- UFO
+-- overrides some of the default fold mappings, these ones leave fold level untouched
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
+vim.keymap.set("n", "K", function()
+    local winid = require("ufo").peekFoldedLinesUnderCursor()
+    if not winid then
+        vim.lsp.buf.hover()
+    end
+end)
+
+
+
+
+
+
 
 -- Neovide
 --

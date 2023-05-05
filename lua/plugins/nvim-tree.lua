@@ -136,7 +136,10 @@ function M.config()
             enable = true
         },
         filters = {
-            dotfiles = true
+            dotfiles = false
+        },
+        git = {
+            ignore = false,
         },
         on_attach = on_attach,
     })
